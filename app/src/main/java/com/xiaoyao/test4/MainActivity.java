@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean[] bArr = new boolean[cityArr.length]; // 复选项初始值
     private View loginDialogView;
     private EditText editText_userName, editText_password;
+    private String index = new String("");
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog.Builder dialog1 = new AlertDialog.Builder
                 (MainActivity.this);
         dialog1.setTitle("文本对话框");
-        dialog1.setMessage("文本");
+        dialog1.setMessage("Hello Android!");
         dialog1.setCancelable(false); // 对话框弹出后点击或按返回键不消失,默认true
         dialog1.setPositiveButton("确定",
                 new DialogInterface.OnClickListener(){
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "你选择了："+cityArr[which], Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, cityArr[which].toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
         dialog2.create().show();
@@ -149,19 +150,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void singleChoiceListDialog(){
         AlertDialog.Builder dialog3 = new AlertDialog.Builder(MainActivity.this);
-        dialog3.setTitle("简单列表对话框");
+        index = cityArr[0];
+        dialog3.setTitle("单选列表对话框");
         dialog3.setSingleChoiceItems(cityArr, 0,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "你选择了："+cityArr[which], Toast.LENGTH_SHORT).show();
+                        index = cityArr[which];
                     }
                 });
         dialog3.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "你点击了确定，关闭对话框", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, index, Toast.LENGTH_SHORT).show();
                         dialog.dismiss(); // 要调用dialog.dismiss()关闭对话框
                     }
                 });
@@ -179,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        //Toast.makeText(MainActivity.this,"你选择了："+cityArr[which],Toast.LENGTH_SHORT).show();
                     }
                 });
         dialog4.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -193,7 +194,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         sb.append(cityArr[i]+",");
                     }
                 }
-                Toast.makeText(MainActivity.this, "你选择了："+sb.toString(), Toast.LENGTH_LONG).show();
+                if(sb.toString().isEmpty()){
+                    Toast.makeText(MainActivity.this, "NULL", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_LONG).show();
+                }
                 dialog.dismiss(); // 要调用dialog.dismiss()关闭对话框
             }
         });
