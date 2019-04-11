@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="本活动的内容：高级控件ListView 自定义Adapter 复合Toast"/>
+        android:text="高级控件ListView 自定义Adapter 复合Toast"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
